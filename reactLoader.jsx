@@ -6,21 +6,18 @@ var reactLoader = React.createClass({
       
       getInitialState: function() {
        return   {
-            timeToHide:1200, // Default Time to hide fakeLoader
             pos:'fixed',// Default Position
             top:'0px',  // Default Top value
             left:'0px', // Default Left value
             width:'100%', // Default width 
             height:'100%', // Default Height
             zIndex: '999',  // Default zIndex 
-            bgColor: '#2ecc71', // Default background color
-            spinner:'spinner7', // Default Spinner
-            imagePath:'' // Default Path custom image
         }
       },
       getDefaultProps: function() {
         return {
-          spinner: 6
+          bgColor: '#2ecc71', // Default background color
+          spinner: 1
         };
       },
     
@@ -90,38 +87,31 @@ var reactLoader = React.createClass({
         }
       
       },
-      fadeOut(){
-      
-      },
       render: function () {
-          console.debug("render REACTLOADER");
-      var initStyles = {
-            'position':this.state.pos,
-               'width':this.state.width,
-              'height':this.state.height,
-                 'top':this.state.top,
-                'left':this.state.left,
-     'backgroundColor':this.state.bgColor,
-              'zIndex':this.state.zIndex
-            };
       
-       
-       // setTimeout(function(){this.fadeOut(); }.bind(this), this.state.timeToHide);
-      
-        var winW = $(window).width();
-        var winH = $(window).height();
-
-        var spinnerW = 50//$('.fl').outerWidth();
-        var spinnerH = 50//$('.fl').outerHeight();
-        
-        return <div style={initStyles}>{this.spinner(this.props.spinner,{ 'position':'absolute',
-                                                                          'left':(winW/2)-(spinnerW/2),
-                                                                          'top':(winH/2)-(spinnerH/2)
-                                                                      })}</div>;
-      }
-      
-      
-      
-      
+         var initStyles = {
+               'position':this.state.pos,
+                  'width':this.state.width,
+                 'height':this.state.height,
+                    'top':this.state.top,
+                   'left':this.state.left,
+        'backgroundColor':this.props.bgColor,
+                 'zIndex':this.state.zIndex
+               };
+         
+           var winW = window.innerWidth;
+           var winH = window.innerHeight;
+   
+           var spinnerW = 50;
+           var spinnerH = 50;
+           
+           return <div style={initStyles}>
+                       {this.spinner(this.props.spinner,{ 'position':'absolute',
+                                                              'left':(winW/2)-(spinnerW/2),
+                                                               'top':(winH/2)-(spinnerH/2)
+                                                          })}
+                 </div>;
+         }
+         
     });
   }
